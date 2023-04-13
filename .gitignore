@@ -23,12 +23,3 @@ yarn-debug.log*
 yarn-error.log*
 
 .gitignore
-src/scenes/bar/*
-src/scenes/calendar/*
-src/scenes/faq/*
-src/scenes/form/*
-src/scenes/geography/*
-src/scenes/invoices/*
-src/scenes/line/*
-src/scenes/pie/*
-src/scenes/contacts/*
