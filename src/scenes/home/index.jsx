@@ -1,11 +1,11 @@
-import { TimelineOutlined } from "@mui/icons-material";
+import { MoneyOutlined } from "@mui/icons-material";
 import { Box, Button, Typography, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import Header from "../../components/Header";
 import { mockDataTransactions } from "../../data/mockData";
 import { tokens } from "../../theme";
 
-const Transactions = () => {
+const Home = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const columns = [
@@ -71,7 +71,7 @@ const Transactions = () => {
   return (
     <Box m="20px">
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Header title="TRANSACTIONS" subtitle="List of Transactions" />
+        <Header title="HOME" subtitle="Home" />
         <Box>
           <Button
             sx={{
@@ -82,8 +82,8 @@ const Transactions = () => {
               padding: "10px 20px",
             }}
           >
-            <TimelineOutlined sx={{ mr: "10px" }} />
-            Add Transaction
+            <MoneyOutlined sx={{ mr: "10px" }} />
+            Withdraw Balance
           </Button>
         </Box>
       </Box>
@@ -122,4 +122,4 @@ const Transactions = () => {
   );
 };
 
-export default Transactions;
+export default Home;

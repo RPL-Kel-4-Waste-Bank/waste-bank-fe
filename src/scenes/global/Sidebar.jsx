@@ -8,6 +8,7 @@ import { useState } from "react";
 import { Menu, MenuItem, ProSidebar } from "react-pro-sidebar";
 import "react-pro-sidebar/dist/css/styles.css";
 import { Link } from "react-router-dom";
+import { getCurrentUser } from "../../helpers/setGet";
 import { tokens } from "../../theme";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
@@ -33,6 +34,10 @@ const Sidebar = () => {
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
+
+  const user = JSON.parse(getCurrentUser());
+
+  if (user === null) window.location.href = "/login"
 
   return (
     <Box
@@ -100,53 +105,73 @@ const Sidebar = () => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  Admin
+                  {user.email.split("@")[0]}
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
-                  Super Admin
+                  {user.role === 0 ? 'Admin' : user.role === 1 ? 'Manager' : 'User'}
                 </Typography>
               </Box>
             </Box>
           )}
 
-          <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-            <Item
-              title="Dashboard"
-              to="/"
-              icon={<HomeOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              Data
-            </Typography>
-            <Item
-              title="Manage Users"
-              to="/users"
-              icon={<WorkOutlineRounded />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Invoices Balances"
-              to="/invoices"
-              icon={<ReceiptOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="User Transaction"
-              to="/transactions"
-              icon={<TimelineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-          </Box>
+          {user.role === 0 ? 
+            <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+              <Item
+                title="Dashboard"
+                to="/"
+                icon={<HomeOutlinedIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Typography
+                variant="h6"
+                color={colors.grey[300]}
+                sx={{ m: "15px 0 5px 20px" }}
+              >
+                Data
+              </Typography>
+              <Item
+                title="Manage Users"
+                to="/users"
+                icon={<WorkOutlineRounded />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Item
+                title="Invoices Balances"
+                to="/invoices"
+                icon={<ReceiptOutlinedIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Item
+                title="Transaction"
+                to="/transactions"
+                icon={<TimelineOutlinedIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+            </Box> : 
+            user.role === 1 ? 
+            <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+              <Item
+                title="Transaction"
+                to="/transactions"
+                icon={<TimelineOutlinedIcon />}
+                selected={"Transaction"}
+                setSelected={setSelected}
+              />
+            </Box> : 
+            <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+              <Item
+                title="Home"
+                to="/home"
+                icon={<HomeOutlinedIcon />}
+                selected={"Home"}
+                setSelected={setSelected}
+              />
+            </Box>
+          }
         </Menu>
       </ProSidebar>
     </Box>

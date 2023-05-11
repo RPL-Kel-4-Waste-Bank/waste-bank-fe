@@ -8,8 +8,23 @@ const Login = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
   const handleFormSubmit = (values) => {
-    setCurrentUser(values)
-    window.location.href = "/"
+    switch (values.email) {
+      case 'admin@gmail.com':
+        values.role = 0
+        window.location.href = "/"
+        setCurrentUser(values)
+        break;
+      case 'manager@gmail.com':
+        values.role = 1
+        window.location.href = "/transactions"
+        setCurrentUser(values)
+        break;
+      default:
+        values.role = 2
+        window.location.href = "/home"
+        setCurrentUser(values)
+        break;
+    }
   };
 
   return (

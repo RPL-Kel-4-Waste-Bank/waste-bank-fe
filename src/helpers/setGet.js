@@ -7,3 +7,8 @@ export const getCurrentUser = () => {
 export const setCurrentUser = (user) => {
   localStorage.setItem("userAccess", JSON.stringify(user))
 }
+
+export const logoutUser = () => {
+  localStorage.removeItem("userAccess");
+  window.location.href = "/login"
+}

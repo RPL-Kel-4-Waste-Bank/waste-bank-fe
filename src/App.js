@@ -6,6 +6,7 @@ import { getCurrentUser } from "./helpers/setGet";
 import Dashboard from "./scenes/dashboard";
 import Sidebar from "./scenes/global/Sidebar";
 import Topbar from "./scenes/global/Topbar";
+import Home from "./scenes/home";
 import Invoices from "./scenes/invoices";
 import Login from "./scenes/login";
 import Transactions from "./scenes/transaction";
@@ -66,6 +67,14 @@ function App() {
                 element={
                   <ProtectedRoute user={user}>
                     <Transactions />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route
+                path="/home"
+                element={
+                  <ProtectedRoute user={user}>
+                    <Home />
                   </ProtectedRoute>
                 } 
               />

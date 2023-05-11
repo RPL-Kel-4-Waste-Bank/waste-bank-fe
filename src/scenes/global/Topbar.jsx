@@ -1,13 +1,12 @@
-import { Box, IconButton, useTheme } from "@mui/material";
-import { useContext } from "react";
-import { ColorModeContext, tokens } from "../../theme";
-import InputBase from "@mui/material/InputBase";
-import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
+import { LogoutOutlined } from "@mui/icons-material";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
-import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
+import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import SearchIcon from "@mui/icons-material/Search";
+import { Box, Button, IconButton, useTheme } from "@mui/material";
+import InputBase from "@mui/material/InputBase";
+import { useContext } from "react";
+import { logoutUser } from "../../helpers/setGet";
+import { ColorModeContext, tokens } from "../../theme";
 
 const Topbar = () => {
   const theme = useTheme();
@@ -37,15 +36,19 @@ const Topbar = () => {
             <LightModeOutlinedIcon />
           )}
         </IconButton>
-        <IconButton>
-          <NotificationsOutlinedIcon />
-        </IconButton>
-        <IconButton>
-          <SettingsOutlinedIcon />
-        </IconButton>
-        <IconButton>
-          <PersonOutlinedIcon />
-        </IconButton>
+          <Button
+            sx={{
+              backgroundColor: colors.blueAccent[700],
+              color: colors.grey[100],
+              fontSize: "10px",
+              fontWeight: "bold",
+              padding: "5px 10px",
+            }}
+            onClick={logoutUser}
+          >
+            <LogoutOutlined sx={{ mr: "10px" }} />
+            Logout
+          </Button>
       </Box>
     </Box>
   );

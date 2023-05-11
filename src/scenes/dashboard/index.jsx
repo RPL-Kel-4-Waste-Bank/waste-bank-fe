@@ -4,7 +4,6 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
 import TrafficIcon from "@mui/icons-material/Traffic";
 import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
-import GeographyChart from "../../components/GeographyChart";
 import Header from "../../components/Header";
 import LineChart from "../../components/LineChart";
 import StatBox from "../../components/StatBox";
@@ -125,7 +124,7 @@ const Dashboard = () => {
         {/* ROW 2 */}
         <Box
           gridColumn="span 8"
-          gridRow="span 2"
+          gridRow="span 4"
           backgroundColor={colors.primary[400]}
         >
           <Box
@@ -159,7 +158,7 @@ const Dashboard = () => {
               </IconButton>
             </Box>
           </Box>
-          <Box height="250px" m="-20px 0 0 0">
+          <Box height="350px" m="-20px 0 0 0">
             <LineChart isDashboard={true} />
           </Box>
         </Box>
@@ -212,23 +211,6 @@ const Dashboard = () => {
               </Box>
             </Box>
           ))}
-        </Box>
-        <Box
-          gridColumn="span 8"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-          padding="30px"
-        >
-          <Typography
-            variant="h5"
-            fontWeight="600"
-            sx={{ marginBottom: "15px" }}
-          >
-            Geography Based Traffic
-          </Typography>
-          <Box height="200px">
-            <GeographyChart isDashboard={true} />
-          </Box>
         </Box>
       </Box>
     </Box>
