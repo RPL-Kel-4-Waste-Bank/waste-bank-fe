@@ -1,46 +1,29 @@
 import { Box, Button, TextField } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import axios from "axios";
 import { Formik } from "formik";
-import {
-  NotificationContainer,
-  NotificationManager,
-} from "react-notifications";
 import * as yup from "yup";
 import { setCurrentUser } from "../../helpers/setGet";
 
 const Login = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
-  const handleFormSubmit = async (values) => {
-    try {
-      const login = await axios.post(
-        "https://hardy-mind-production.up.railway.app/login",
-        values
-      );
-      const response = login.data;
-
-      if (response.success) {
-        switch (response.data.role) {
-          case 0:
-            window.location.href = "/";
-
-            setCurrentUser(response.data);
-            break;
-          case 1:
-            window.location.href = "/transactions";
-            setCurrentUser(response.data);
-            break;
-          default:
-            window.location.href = "/home";
-            setCurrentUser(response.data);
-            break;
-        }
-      } else {
-        NotificationManager.warning("Error", "Someting wrong", 3000);
-      }
-    } catch (error) {
-      NotificationManager.error("Error", "API Error", 3000);
+  const handleFormSubmit = (values) => {
+    switch (values.email) {
+      case "admin@gmail.com":
+        values.role = 0;
+        window.location.href = "/";
+        setCurrentUser(values);
+        break;
+      case "manager@gmail.com":
+        values.role = 1;
+        window.location.href = "/transactions";
+        setCurrentUser(values);
+        break;
+      default:
+        values.role = 2;
+        window.location.href = "/home";
+        setCurrentUser(values);
+        break;
     }
   };
 
@@ -53,13 +36,13 @@ const Login = () => {
           alignItems: "center",
           justifyContent: "center",
           marginBottom: "2rem",
-          color: "#00BCD4", // Ubah warna judul
-          fontFamily: "Arial, sans-serif", // Ubah font judul
+          color: "#00BCD4",
+          fontFamily: "Arial, sans-serif",
           fontWeight: "bold",
-          textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)", // Tambahkan efek shadow
         }}
       >
-        WASTE BANK
+        {" "}
+        WASTE BANK{" "}
       </div>
 
       <Formik
@@ -120,14 +103,13 @@ const Login = () => {
               />
             </Box>
             <Box display="flex" justifyContent="end" mt="20px">
-              <Button type="submit" color="primary" variant="contained">
-                LOGIN
+              <Button type="submit" color="secondary" variant="contained">
+                Login
               </Button>
             </Box>
           </form>
         )}
       </Formik>
-      <NotificationContainer />
     </Box>
   );
 };
